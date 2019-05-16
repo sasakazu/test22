@@ -7,15 +7,57 @@
 //
 
 import UIKit
+import RealmSwift
 
-class table: UIViewController {
+
+class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
+
+     var projectName: Results<Project>!
+    
+    @IBOutlet weak var tableview: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+      
+         let realm = try! Realm()
+        
+        projectName = realm.objects(Project.self)
+            
+    
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableview.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return projectName.count
     }
     
 
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexpath: IndexPath)->UITableViewCell {
+        
+        
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
+        
+        let object = projectName[indexpath.row]
+        
+        cell.textLabel?.text = object.name
+        
+        return cell
+        
+        
 
+
+}
 }

@@ -20,48 +20,67 @@ class addProject: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         text.delegate = self
-        itemTF.delegate = self
+        
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
     }
     
 
     @IBAction func bbb(_ sender: Any) {
-
-
-        let newSetMenu = Project()
-
-        newSetMenu.name = text.text!
-
-        do{
-            let realm = try Realm()
-            try realm.write({ () -> Void in
-                
-                realm.add(newSetMenu)
-                print("プロジェクト名成功！！")
-
-            })
-        }catch{
-            print("失敗！！！")
-        }
         
-        let newItem = Item()
         
-        newItem.name = itemTF.text!
+        let person = Project()
+        
+        person.name = text.text!
+        
+//        let person = Project(value: ["name": "Yu"])
         
         do {
             let realm = try Realm()
             try! realm.write {
-                newSetMenu.items.append(newItem) //1対多の関連を追加
-                print("追加後person") //catが含まれていることを確認
+                realm.add(person) //モデルオブジェクトの追加
+                print("1回目成功だよ", person)
+            }
+        } catch {
+            print("エラーだよ")
+        }
+        
+     
+        let cat = Item()
+        
+        cat.name = itemTF.text!
+        
+        
+//        let cat = Item(value: ["name": "ijjtemtest"])
+ 
+        /*
+         1対多を追加
+         */
+        do {
+            let realm = try Realm()
+            try! realm.write {
+                person.items.append(cat) //1対多の関連を追加
+                
+                 print("追加後person.cats: \(person.items)") //catが含まれていることを確認
             }
         } catch {
         }
 
+
         
+//        performSegue(withIdentifier: "go", sender: nil)
         
         
     }
+    
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let next = segue.destination as? addItem
+//        let _ = next?.view
+//
+//        next?.reciveProject = text.text!
+//    }
     
     
     

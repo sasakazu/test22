@@ -11,20 +11,28 @@ import RealmSwift
 
 class addItem: UIViewController {
     
+    
+    var reciveProject:String = ""
+    
+    
     @IBOutlet weak var itemTF: UITextField!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        
+//    /let realm = try! Realm()
+     
+    
+    
     }
     
 
 
     @IBAction func saveBtn(_ sender: Any) {
         
+    
     }
-    
-    
+
 }

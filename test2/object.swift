@@ -17,16 +17,16 @@ class Project: Object {
 
     let items = List<Item>()    // 1対Nの関係
 
-    override static func primaryKey() -> String? {
-        return "id"
-
-    }
-
-    override static func indexedProperties() -> [String] {
-
-        return ["name"]
-        
-    }
+//    override static func primaryKey() -> String? {
+//        return "id"
+//
+//    }
+//
+//    override static func indexedProperties() -> [String] {
+//
+//        return ["name"]
+//
+//    }
 
     
 }

@@ -29,42 +29,42 @@ class addProject: UIViewController, UITextFieldDelegate {
     @IBAction func bbb(_ sender: Any) {
         
         
-        let person = Project()
-        
-        person.name = text.text!
-        
-//        let person = Project(value: ["name": "Yu"])
-        
-        do {
-            let realm = try Realm()
-            try! realm.write {
-                realm.add(person) //モデルオブジェクトの追加
-                print("1回目成功だよ", person)
-            }
-        } catch {
-            print("エラーだよ")
-        }
+//        let person = Project()
+//
+//        person.name = text.text!
+//
+////        let person = Project(value: ["name": "Yu"])
+//
+//        do {
+//            let realm = try Realm()
+//            try! realm.write {
+//                realm.add(person) //モデルオブジェクトの追加
+//                print("1回目成功だよ", person)
+//            }
+//        } catch {
+//            print("エラーだよ")
+//        }
         
      
-        let cat = Item()
-        
-        cat.name = itemTF.text!
-        
-        
-//        let cat = Item(value: ["name": "ijjtemtest"])
- 
-        /*
-         1対多を追加
-         */
-        do {
-            let realm = try Realm()
-            try! realm.write {
-                person.items.append(cat) //1対多の関連を追加
-                
-                 print("追加後person.cats: \(person.items)") //catが含まれていることを確認
-            }
-        } catch {
-        }
+//        let cat = Item()
+//
+//        cat.name = itemTF.text!
+//
+//
+////        let cat = Item(value: ["name": "ijjtemtest"])
+//
+//        /*
+//         1対多を追加
+//         */
+//        do {
+//            let realm = try Realm()
+//            try! realm.write {
+//                person.items.append(cat) //1対多の関連を追加
+//
+//                 print("追加後person.cats: \(person.items)") //catが含まれていることを確認
+//            }
+//        } catch {
+//        }
 
 
         
@@ -75,12 +75,12 @@ class addProject: UIViewController, UITextFieldDelegate {
     
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let next = segue.destination as? addItem
-//        let _ = next?.view
-//
-//        next?.reciveProject = text.text!
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let next = segue.destination as? addItem
+        let _ = next?.view
+
+        next?.reciveProject = text.text!
+    }
     
     
     

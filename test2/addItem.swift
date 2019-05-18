@@ -16,6 +16,7 @@ class addItem: UIViewController {
     
     
     @IBOutlet weak var itemTF: UITextField!
+    @IBOutlet weak var item2: UITextField!
     
     @IBOutlet weak var label: UILabel!
     
@@ -57,7 +58,11 @@ class addItem: UIViewController {
                 cat.name = itemTF.text!
         
         
-        //        let cat = Item(value: ["name": "ijjtemtest"])
+        
+        
+//                cat.name = Item[(value: ["name": "ijjtemtest"],["name": "jkjkjk"])]
+        
+        
         
                 /*
                  1対多を追加
@@ -71,6 +76,24 @@ class addItem: UIViewController {
                     }
                 } catch {
                 }
+        
+        
+        let dog = Item()
+        
+        dog.name = item2.text!
+        
+        
+        do {
+            let realm = try Realm()
+            try! realm.write {
+                person.items.append(dog) //1対多の関連を追加
+                
+                print("追加後person.cats: \(person.items)") //catが含まれていることを確認
+            }
+        } catch {
+        }
+        
+        
         
 //        do {
 //            let realm = try Realm()

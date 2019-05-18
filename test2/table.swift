@@ -11,8 +11,13 @@ import RealmSwift
 
 
 class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
-
-     var projectName: Results<Project>!
+    
+//    let items = List<Item>()
+    var projectName: Results<Project>!
+    var currr:Int = 0
+    var Name:String = ""
+    var itemName:String = ""
+//    var itemArray: [String] =  []
     
     @IBOutlet weak var tableview: UITableView!
     
@@ -56,8 +61,38 @@ class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
         
         return cell
         
-        
-
-
+    
 }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let object = projectName[indexPath.row]
+        
+        currr = object.id
+        
+        Name = object.name
+  
+        performSegue(withIdentifier: "go",sender: nil)
+        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if (segue.identifier == "go") {
+            
+            
+            let secondVC: detail = (segue.destination as? detail)!
+            
+            
+            secondVC.reciveName = Name
+            secondVC.currentID = currr
+            
+        }
+        
+    }
+    
+    
+    
+    
 }

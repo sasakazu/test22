@@ -19,12 +19,13 @@ class detail: UIViewController
     
     var reciveName:String = ""
     var reciveItem:String = ""
-    var currentID:Int = 0
-    
+    var currentId:Int = 0
+    var current:Int = 0
     var name:String = ""
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var itemLabel: UILabel!
+    @IBOutlet weak var itemLabel2: UILabel!
     
     
     @IBOutlet weak var tableview: UITableView!
@@ -32,23 +33,40 @@ class detail: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        current = currentId - 1
+        
+        print("IDは\(currentId)")
+        
         let realm = try! Realm()
         
         var user = realm.objects(Project.self).filter("name == %@", reciveName)
+        var users = realm.objects(Project.self).filter("id == %@", current)
         
-        user = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
-        
-        print(user.count)
-        print(user[currentID])
-        
-        user = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
+//        print("USERIDは\(currentId)")
 
-        print(user.count)
+        users = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
         
-        let u = user[currentID]
-        let day = u.items
-        print(day)
-    
+//        user2 = realm.objects(Project.self).filter("id == %@", currentId)
+//        print("projectのカウント\(user.count)")
+//        print("カレントID\(user[0])")
+        
+        
+//        print(user2.count)
+        
+        let u = users[current]
+        let days = u.items
+        print("現在表示しているのは\(u)")
+//        print(day)
+        
+        label.text = reciveName
+      
+        for day in days {
+            print("name: \(day.name)")
+            
+          
+        }
+        
+        
     }
     
     

@@ -33,13 +33,11 @@ class addItem: UIViewController {
 
     @IBAction func saveBtn(_ sender: Any) {
         
-    
                 let person = Project()
         
                 person.name = reciveProject
         
-//                let person = Project(value: ["name": "Yu"])
-        
+                person.save()
         
         
                 do {
@@ -57,13 +55,6 @@ class addItem: UIViewController {
         
                 cat.name = itemTF.text!
         
-        
-        
-        
-//                cat.name = Item[(value: ["name": "ijjtemtest"],["name": "jkjkjk"])]
-        
-        
-        
                 /*
                  1対多を追加
                  */
@@ -72,7 +63,6 @@ class addItem: UIViewController {
                     try! realm.write {
                         person.items.append(cat) //1対多の関連を追加
         
-                         print("追加後person.cats: \(person.items)") //catが含まれていることを確認
                     }
                 } catch {
                 }
@@ -93,17 +83,6 @@ class addItem: UIViewController {
         } catch {
         }
         
-        
-        
-//        do {
-//            let realm = try Realm()
-//            try! realm.write {
-//                person.items.remove(at: 0) //1対多の関連を削除
-//                print("削除後person.cats: \(person.items)") //catが含まれていないことを確認
-//            }
-//        } catch {
-//
-//        }
         
 
         self.navigationController?.popToRootViewController(animated: true)

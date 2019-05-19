@@ -12,12 +12,11 @@ import RealmSwift
 
 class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
     
-//    let items = List<Item>()
     var projectName: Results<Project>!
     var currr:Int = 0
     var Name:String = ""
     var itemName:String = ""
-//    var itemArray: [String] =  []
+
     
     @IBOutlet weak var tableview: UITableView!
     
@@ -86,7 +85,7 @@ class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
             
             
             secondVC.reciveName = Name
-            secondVC.currentID = currr
+            secondVC.currentId = currr
             
         }
         

@@ -12,6 +12,8 @@ import RealmSwift
 class Project: Object {
 
     @objc dynamic var id : Int = 0
+    dynamic var order = 0 // 並べ替えのためのカラムが必要
+
 
     @objc dynamic var name : String = ""
 

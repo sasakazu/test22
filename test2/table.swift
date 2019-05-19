@@ -26,9 +26,9 @@ class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
       
          let realm = try! Realm()
         
-        projectName = realm.objects(Project.self)
+        projectName = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
             
-    
+        print("idは\(currr)です")
         
     }
     
@@ -68,7 +68,7 @@ class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
         
         let object = projectName[indexPath.row]
         
-        currr = object.id
+//        currr = object.id - 1
         
         Name = object.name
   
@@ -85,12 +85,29 @@ class table: UIViewController ,UITableViewDelegate, UITableViewDataSource {
             
             
             secondVC.reciveName = Name
-            secondVC.currentId = currr
+//            secondVC.currentId = currr
             
         }
         
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+        if(editingStyle == UITableViewCell.EditingStyle.delete) {
+            do{
+                let realm = try Realm()
+                try realm.write {
+                    realm.delete(self.projectName[indexPath.row])
+                }
+                tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.fade)
+            }catch{
+                
+                
+                self.tableview.reloadData()
+            }
+        }
+    }
     
     
     

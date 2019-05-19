@@ -14,7 +14,7 @@ class detail: UIViewController
 
 {
     
-    var projectResult: Results<Project>!
+//    var projectResult: Results<Project>!
  
     
     var reciveName:String = ""
@@ -22,6 +22,8 @@ class detail: UIViewController
     var currentId:Int = 0
     var current:Int = 0
     var name:String = ""
+    
+//    let u:Array = [""]
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var itemLabel: UILabel!
@@ -33,28 +35,44 @@ class detail: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        current = currentId - 1
+        current = currentId
         
-        print("IDは\(currentId)")
+        print("cueewntIDは\(currentId)")
+        
+        print("cueewntは\(current)")
+        
+        
+        
         
         let realm = try! Realm()
         
-//        var user = realm.objects(Project.self).filter("name == %@", reciveName)
-        var users = realm.objects(Project.self).filter("id == %@", current)
+//        var users = realm.objects(Project.self).filter("name == %@", reciveName)
+        
+//        print(users.id)
+        
+        var users = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
+        users = realm.objects(Project.self).filter("name == %@", reciveName)
+        
+        
+//        users = realm.objects(Project.self).filter("id == %@", currentId)
 
 
-        users = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
         
+        let u = users.first
+        let days = u!.items
         
+//        let id =
+        print("現在表示しているのは\(String(describing: u))")
         
-        let u = users[current]
-        let days = u.items
-        print("現在表示しているのは\(u)")
-        
-        label.text = reciveName
+        label.text = u?.name
       
         for day in days {
             print("name: \(day.name)")
+            
+           print(day.name)
+            
+            itemLabel.text = day.name
+            itemLabel2.text = day.name
             
           
         }

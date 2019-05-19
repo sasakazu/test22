@@ -39,24 +39,17 @@ class detail: UIViewController
         
         let realm = try! Realm()
         
-        var user = realm.objects(Project.self).filter("name == %@", reciveName)
+//        var user = realm.objects(Project.self).filter("name == %@", reciveName)
         var users = realm.objects(Project.self).filter("id == %@", current)
-        
-//        print("USERIDは\(currentId)")
+
 
         users = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
         
-//        user2 = realm.objects(Project.self).filter("id == %@", currentId)
-//        print("projectのカウント\(user.count)")
-//        print("カレントID\(user[0])")
         
-        
-//        print(user2.count)
         
         let u = users[current]
         let days = u.items
         print("現在表示しているのは\(u)")
-//        print(day)
         
         label.text = reciveName
       

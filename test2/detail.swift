@@ -34,37 +34,22 @@ class detail: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        current = currentId
-        
-        print("cueewntIDは\(currentId)")
-        
-        print("cueewntは\(current)")
-        
-        
-        
+
         
         let realm = try! Realm()
         
-//        var users = realm.objects(Project.self).filter("name == %@", reciveName)
-        
-//        print(users.id)
-        
         var users = realm.objects(Project.self).sorted(byKeyPath: "id", ascending: true)
+        
         users = realm.objects(Project.self).filter("name == %@", reciveName)
         
+//        配列の最初だけをとる
+        let u = users[0]
+        let days = u.items
         
-//        users = realm.objects(Project.self).filter("id == %@", currentId)
 
-
+        print("現在表示しているのは\(u))")
         
-        let u = users.first
-        let days = u!.items
-        
-//        let id =
-        print("現在表示しているのは\(String(describing: u))")
-        
-        label.text = u?.name
+        label.text = u.name
       
         for day in days {
             print("name: \(day.name)")
